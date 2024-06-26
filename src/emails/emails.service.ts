@@ -17,24 +17,25 @@ export class EmailsService {
   async create(createEmailDto: CreateEmailDto) {
     const email = new Email();
     email.title = createEmailDto.title;
-    await this.emailRepository.save(email);
-    return "This action adds a new email";
+    return await this.emailRepository.save(email);
   }
 
-  findAll() {
-    return `This action returns all emails`;
+  async findAll() {
+    return await this.emailRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} email`;
+  async findOne(id: number) {
+    return await this.emailRepository.findOneByOrFail({ id });
   }
 
-  update(id: number, updateEmailDto: UpdateEmailDto) {
-    console.log(JSON.stringify(updateEmailDto));
-    return `This action updates a #${id} email`;
+  async update(id: number, updateEmailDto: UpdateEmailDto) {
+    return await this.emailRepository.update({ id }, updateEmailDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} email`;
+  async remove(id: number) {
+    const email = this.emailRepository.findOneByOrFail({ id });
+    const emails = [];
+    emails.push(email);
+    return await this.emailRepository.remove(emails);
   }
 }
