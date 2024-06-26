@@ -1,1 +1,3 @@
-export class CreateEmailDto {}
+export class CreateEmailDto {
+  readonly title: string;
+}
