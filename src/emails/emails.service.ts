@@ -5,6 +5,7 @@ import { ConfigService } from "@nestjs/config";
 import { Email } from "./entities/email.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { ReplaceEmailDto } from "./dto/replace-email.dto";
 
 @Injectable()
 export class EmailsService {
@@ -30,6 +31,10 @@ export class EmailsService {
 
   async update(id: number, updateEmailDto: UpdateEmailDto) {
     return await this.emailRepository.update({ id }, updateEmailDto);
+  }
+
+  async replace(id: number, replaceEmailDto: ReplaceEmailDto) {
+    return await this.emailRepository.update({ id }, replaceEmailDto);
   }
 
   async remove(id: number) {

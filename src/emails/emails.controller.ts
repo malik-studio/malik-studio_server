@@ -5,11 +5,12 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
+  Delete, Put,
 } from "@nestjs/common";
 import { EmailsService } from "./emails.service";
 import { CreateEmailDto } from "./dto/create-email.dto";
 import { UpdateEmailDto } from "./dto/update-email.dto";
+import { ReplaceEmailDto } from "./dto/replace-email.dto";
 
 @Controller("emails")
 export class EmailsController {
@@ -33,6 +34,11 @@ export class EmailsController {
   @Patch(":id")
   update(@Param("id") id: string, @Body() updateEmailDto: UpdateEmailDto) {
     return this.emailsService.update(+id, updateEmailDto);
+  }
+
+  @Put(":id")
+  replace(@Param("id") id: string, @Body() replaceEmailDto: ReplaceEmailDto) {
+    return this.emailsService.replace(+id, replaceEmailDto);
   }
 
   @Delete(":id")
