@@ -38,9 +38,6 @@ export class EmailsService {
   }
 
   async remove(id: number) {
-    const email = this.emailRepository.findOneByOrFail({ id });
-    const emails = [];
-    emails.push(email);
-    return await this.emailRepository.remove(emails);
+    return await this.emailRepository.delete({ id });
   }
 }
